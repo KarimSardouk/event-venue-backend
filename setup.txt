@@ -1,0 +1,35 @@
+This is where all the MySql queries are:
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    fullName VARCHAR(25) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(15) NOT NULL,
+    role VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE venues (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    capacity INT NOT NULL,
+    image VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE events (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(25) NOT NULL,
+    date DATE NOT NULL,
+    ticketPrice INT NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    venueID INT NOT NULL,  -- Changed this line to make it NOT NULL
+    FOREIGN KEY (venueID) REFERENCES venues(id)
+);
+
+CREATE TABLE reservations (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    venueID INT,
+    userID INT,
+    FOREIGN KEY (venueID) REFERENCES venues(id),
+    FOREIGN KEY (userID) REFERENCES users(id)
+);
